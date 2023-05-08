@@ -1,8 +1,21 @@
 package nz.ac.auckland.se281;
 
-public class AverageStrategy {
+public class AverageStrategy implements Strategy {
+
+    @Override
     public void runStrategy() {
-        System.out.println("Average Strategy");
+        
+    }
+
+    @Override
+    public String getFingers() {
+        return null;
+        
+    }
+
+    @Override
+    public String getSum() {
+        return null;
     }
     
 }

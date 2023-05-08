@@ -1,9 +1,19 @@
 package nz.ac.auckland.se281;
 
-public class TopStrategy {
+public class TopStrategy implements Strategy{
 
+    @Override
     public void runStrategy() {
-        System.out.println("Top Strategy");
+    }
+
+    @Override
+    public String getFingers() {
+        return null;
+    }
+
+    @Override
+    public String getSum() {
+        return null;
     }
     
 }
