@@ -30,5 +30,13 @@ public class Player {
                 return null;
         }
     }
+
+    public int getFingers() {
+        return strategy.getFingers();
+    }
+
+    public int getSum() {
+        return strategy.getSum();
+    }
     
 }

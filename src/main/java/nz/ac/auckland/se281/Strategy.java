@@ -3,7 +3,7 @@ package nz.ac.auckland.se281;
 public interface Strategy {
     public abstract void runStrategy();
 
-    public abstract String getFingers();
+    public abstract int getFingers();
 
-    public abstract String getSum();
+    public abstract int getSum();
 }

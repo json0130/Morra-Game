@@ -8,14 +8,14 @@ public class AverageStrategy implements Strategy {
     }
 
     @Override
-    public String getFingers() {
-        return null;
+    public int getFingers() {
+        return 0;
         
     }
 
     @Override
-    public String getSum() {
-        return null;
+    public int getSum() {
+        return 0;
     }
     
 }

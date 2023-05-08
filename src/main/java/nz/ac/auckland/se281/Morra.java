@@ -86,8 +86,8 @@ public class Morra {
   public void result() {
     int fingersInt = Integer.parseInt(fingers);
     int sumInt = Integer.parseInt(sum);
-    // int aiFingers = Integer.parseInt(Jarvis.getStrategy(difficulty).getFingers());
-    // int aiSum = Integer.parseInt(Jarvis.getStrategy(difficulty).getSum());
+    int aiFingers = Jarvis.getFingers();
+    int aiSum = Jarvis.getSum();
 
     if ((fingersInt + aiFingers) == aiSum) {
       MessageCli.PRINT_OUTCOME_ROUND.printMessage("AI_WINS");
