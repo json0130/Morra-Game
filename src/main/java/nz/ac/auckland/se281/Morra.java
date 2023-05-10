@@ -10,26 +10,24 @@ public class Morra {
   private String player;
   private int i = 1;
   private Difficulty difficulty;
-  Player Jarvis = new Player();
 
   public Morra() {}
 
-  public void newGame(Difficulty difficulty, int pointsToWin, String[] options) {
-    this.difficulty = difficulty;
-    player = options[0];
-    MessageCli.WELCOME_PLAYER.printMessage(player);
-    
-  }
+    public void newGame(Difficulty difficulty, int pointsToWin, String[] options) {
+      this.difficulty = difficulty;
+      player = options[0];
+      MessageCli.WELCOME_PLAYER.printMessage(player);
+    }
 
   public void play() {
-      i = 1;
       startRound();
       askUserInput();
 
-      Jarvis.getStrategy(difficulty);
-      Jarvis.runStrategy();
+      Jarvis jarvis = Player.createAi(difficulty);
+      jarvis.runStrategy();
 
-      result();
+      result(jarvis.getFingers(),jarvis.getSum());
+      
   }
 
   public void startRound(){
@@ -83,11 +81,9 @@ public class Morra {
     }
   }
 
-  public void result() {
+  public void result(int aiFingers, int aiSum) {
     int fingersInt = Integer.parseInt(fingers);
     int sumInt = Integer.parseInt(sum);
-    int aiFingers = Jarvis.getFingers();
-    int aiSum = Jarvis.getSum();
 
     if ((fingersInt + aiFingers) == aiSum) {
       MessageCli.PRINT_OUTCOME_ROUND.printMessage("AI_WINS");
@@ -99,7 +95,6 @@ public class Morra {
       MessageCli.PRINT_OUTCOME_ROUND.printMessage("DRAW");
     }
   } 
-  
-  public void showStats() {
-  }
+
+  public void showStats() {}
 }

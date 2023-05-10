@@ -2,41 +2,32 @@ package nz.ac.auckland.se281;
 
 import nz.ac.auckland.se281.Main.Difficulty;
 
-public class Player {
+public abstract class Player {
 
-    private Strategy strategy;
+    public static Jarvis createAi(Difficulty difficulty) {
+       
+        switch(difficulty){
 
-    public void setStrategy(Strategy strategy) {
-        this.strategy = strategy;
-    }
+              case EASY:
+                   return new Easy();
+                   
+            //    case MEDIUM:
+            //        return new Medium();
 
-    public void runStrategy() {
-        strategy.runStrategy();
-    }
+            //    case HARD:
+            //        return new Hard();
 
-    public Player getStrategy(Difficulty difficulty) {
-        // Get the strategy based on the difficulty
-        switch (difficulty) {
-            case EASY:
-                setStrategy(new RandomStrategy());
-                return this;
-            case MEDIUM:
-                setStrategy(new AverageStrategy());
-                return this;
-            case HARD:
-                setStrategy(new TopStrategy());
-                return this;
-            default:
-                return null;
-        }
-    }
+            //    case MASTER:
+            //          return new Master();
+               default:
+                   return null; // don't learn thi
 
-    public int getFingers() {
-        return strategy.getFingers();
-    }
+        }       
 
-    public int getSum() {
-        return strategy.getSum();
-    }
+
+
+
+
+   }
     
 }
