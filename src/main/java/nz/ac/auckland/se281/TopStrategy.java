@@ -3,7 +3,7 @@ package nz.ac.auckland.se281;
 public class TopStrategy implements Strategy{
 
     @Override
-    public void runStrategy() {
+    public void runStrategy(int average) {
     }
 
     @Override

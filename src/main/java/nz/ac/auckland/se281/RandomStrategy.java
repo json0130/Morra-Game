@@ -6,7 +6,7 @@ public class RandomStrategy implements Strategy{
     int aiSum;
 
     @Override
-    public void runStrategy() {
+    public void runStrategy(int average) {
         aiFingers = Utils.getRandomNumber(1,5);
         aiSum = Utils.getRandomNumber(aiFingers + 1,aiFingers + 5);
         

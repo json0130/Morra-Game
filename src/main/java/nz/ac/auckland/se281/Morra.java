@@ -1,5 +1,7 @@
 package nz.ac.auckland.se281;
 
+import java.util.ArrayList;
+
 import nz.ac.auckland.se281.Main.Difficulty;
 
 public class Morra {
@@ -11,6 +13,8 @@ public class Morra {
   private int i = 1;
   private Difficulty difficulty;
 
+  private ArrayList<Integer> playerFingerList = new ArrayList<Integer>();
+
   public Morra() {}
 
     public void newGame(Difficulty difficulty, int pointsToWin, String[] options) {
@@ -19,46 +23,51 @@ public class Morra {
       MessageCli.WELCOME_PLAYER.printMessage(player);
     }
 
-  public void play() {
+    public void play() {
       startRound();
       askUserInput();
 
       Jarvis jarvis = Player.createAi(difficulty);
-      jarvis.runStrategy();
-
-      result(jarvis.getFingers(),jarvis.getSum());
+      jarvis.runStrategy(calculateAverage());
       
-  }
+      result(jarvis.getFingers(),jarvis.getSum());
+    }
 
-  public void startRound(){
-      MessageCli.START_ROUND.printMessage(Integer.toString(i)); 
-  }
+    public void startRound(){
+        MessageCli.START_ROUND.printMessage(Integer.toString(i)); 
+    }
 
-  public void askUserInput() {
-    do{
-      MessageCli.ASK_INPUT.printMessage();
-      input = Utils.scanner.nextLine();
-    }while(!isInputValid());
+    public void askUserInput() {
+      do{
+        MessageCli.ASK_INPUT.printMessage();
+        input = Utils.scanner.nextLine();
+      }while(!isInputValid());
 
-    MessageCli.PRINT_INFO_HAND.printMessage(player, fingers, sum);
-    i++;
-  }    
+      MessageCli.PRINT_INFO_HAND.printMessage(player, fingers, sum);
+      playerFingerList.add(Integer.parseInt(fingers));
+      i++;
+    }    
 
-  public boolean isInputValid() {
+    public boolean isInputValid() {
 
-    String[] inputString = input.split("\\s+"); // split by whitespace
+      String[] inputString = input.split("\\s+"); // split by whitespace
 
-    if (inputString.length == 2)
-    {
-      fingers = inputString[0];
-      sum = inputString[1];
-      if (Utils.isInteger(fingers) && Utils.isInteger(sum)) 
+      if (inputString.length == 2)
       {
-        int fingersInt = Integer.parseInt(fingers);
-        int sumInt = Integer.parseInt(sum);
-        if (fingersInt >= 1 && fingersInt <= 5) {
-            if (sumInt >= 1 && sumInt <= 10) {
-              return true;
+        fingers = inputString[0];
+        sum = inputString[1];
+        if (Utils.isInteger(fingers) && Utils.isInteger(sum)) 
+        {
+          int fingersInt = Integer.parseInt(fingers);
+          int sumInt = Integer.parseInt(sum);
+          if (fingersInt >= 1 && fingersInt <= 5) {
+              if (sumInt >= 1 && sumInt <= 10) {
+                return true;
+              }
+              else {
+                MessageCli.INVALID_INPUT.printMessage();
+                return false;
+              }
             }
             else {
               MessageCli.INVALID_INPUT.printMessage();
@@ -70,31 +79,36 @@ public class Morra {
             return false;
           }
         }
-        else {
-          MessageCli.INVALID_INPUT.printMessage();
-          return false;
-        }
+      else {
+        MessageCli.INVALID_INPUT.printMessage();
+        return false;
       }
-    else {
-      MessageCli.INVALID_INPUT.printMessage();
-      return false;
     }
-  }
 
-  public void result(int aiFingers, int aiSum) {
-    int fingersInt = Integer.parseInt(fingers);
-    int sumInt = Integer.parseInt(sum);
+    public int calculateAverage(){
+      int sum = 0;
+      for (int i = 0; i < playerFingerList.size(); i++) {
+        sum += playerFingerList.get(i);
+      }
+      double average = sum / playerFingerList.size();
+      int averageInt = (int) Math.round(average);
+      return averageInt;
+    }
 
-    if ((fingersInt + aiFingers) == aiSum) {
-      MessageCli.PRINT_OUTCOME_ROUND.printMessage("AI_WINS");
-    }
-    else if ((fingersInt + aiFingers) == sumInt) {
-      MessageCli.PRINT_OUTCOME_ROUND.printMessage("HUMAN_WINS");
-    }
-    else {
-      MessageCli.PRINT_OUTCOME_ROUND.printMessage("DRAW");
-    }
-  } 
+    public void result(int aiFingers, int aiSum) {
+      int fingersInt = Integer.parseInt(fingers);
+      int sumInt = Integer.parseInt(sum);
 
-  public void showStats() {}
+      if ((fingersInt + aiFingers) == aiSum) {
+        MessageCli.PRINT_OUTCOME_ROUND.printMessage("AI_WINS");
+      }
+      else if ((fingersInt + aiFingers) == sumInt) {
+        MessageCli.PRINT_OUTCOME_ROUND.printMessage("HUMAN_WINS");
+      }
+      else {
+        MessageCli.PRINT_OUTCOME_ROUND.printMessage("DRAW");
+      }
+    } 
+
+    public void showStats() {}
 }

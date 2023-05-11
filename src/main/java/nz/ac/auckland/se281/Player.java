@@ -11,8 +11,8 @@ public abstract class Player {
               case EASY:
                    return new Easy();
                    
-            //    case MEDIUM:
-            //        return new Medium();
+               case MEDIUM:
+                   return new Medium();
 
             //    case HARD:
             //        return new Hard();
@@ -23,10 +23,6 @@ public abstract class Player {
                    return null; // don't learn thi
 
         }       
-
-
-
-
 
    }
     

@@ -1,7 +1,7 @@
 package nz.ac.auckland.se281;
 
 public interface Jarvis {
-    public abstract void runStrategy(); 
+    public abstract void runStrategy(int average); 
     
     public abstract int getFingers();
 

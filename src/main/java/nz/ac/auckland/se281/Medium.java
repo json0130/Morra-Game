@@ -1,12 +1,12 @@
 package nz.ac.auckland.se281;
 
-public class Easy implements Jarvis {
+public class Medium implements Jarvis {
 
     private Strategy strategy;
 
     @Override
     public void runStrategy(int average) {
-        Strategy strategy = new RandomStrategy();
+        Strategy strategy = new AverageStrategy();
         this.strategy = strategy;
         strategy.runStrategy(average);
     }
@@ -19,5 +19,5 @@ public class Easy implements Jarvis {
     @Override
     public int getSum() {
         return strategy.getSum();
-    }   
+    }  
 }
