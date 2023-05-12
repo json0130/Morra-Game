@@ -5,7 +5,7 @@ public class Easy implements Jarvis {
     private Strategy strategy;
 
     @Override
-    public void runStrategy(int average) {
+    public void runStrategy(int average, int round) {
         Strategy strategy = new RandomStrategy();
         this.strategy = strategy;
         strategy.runStrategy(average);

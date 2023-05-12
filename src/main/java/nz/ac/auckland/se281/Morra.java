@@ -21,6 +21,7 @@ public class Morra {
       this.difficulty = difficulty;
       player = options[0];
       MessageCli.WELCOME_PLAYER.printMessage(player);
+      removeAllFingers();
     }
 
     public void play() {
@@ -28,7 +29,7 @@ public class Morra {
       askUserInput();
 
       Jarvis jarvis = Player.createAi(difficulty);
-      jarvis.runStrategy(calculateAverage());
+      jarvis.runStrategy(calculateAverage(i),i);
       
       result(jarvis.getFingers(),jarvis.getSum());
     }
@@ -85,14 +86,23 @@ public class Morra {
       }
     }
 
-    public int calculateAverage(){
-      int sum = 0;
-      for (int i = 0; i < playerFingerList.size(); i++) {
-        sum += playerFingerList.get(i);
+    public int calculateAverage(int i){
+      double sum = 0;
+      double average = 0;
+      int size = playerFingerList.size();
+
+      for (int j = 0; j < size-1; j++) {
+        sum += playerFingerList.get(j);
       }
-      double average = sum / playerFingerList.size();
+      if(i > 1) {
+         average = sum / (size-1);
+      }
       int averageInt = (int) Math.round(average);
       return averageInt;
+    }
+
+    public void removeAllFingers() {
+      playerFingerList.clear();
     }
 
     public void result(int aiFingers, int aiSum) {
