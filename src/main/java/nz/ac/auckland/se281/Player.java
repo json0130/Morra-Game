@@ -14,13 +14,13 @@ public abstract class Player {
                case MEDIUM:
                    return new Medium();
 
-            //    case HARD:
-            //        return new Hard();
+               case HARD:
+                   return new Hard();
 
-            //    case MASTER:
-            //          return new Master();
+               case MASTER:
+                     return new Master();
                default:
-                   return null; // don't learn thi
+                   return null;
 
         }       
 

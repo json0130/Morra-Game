@@ -1,6 +1,6 @@
 package nz.ac.auckland.se281;
 
-public class Medium implements Jarvis {
+public class Master implements Jarvis {
 
     private Strategy strategy;
     private int round;
@@ -25,8 +25,12 @@ public class Medium implements Jarvis {
     }  
 
     public Strategy changeStrategy() {
-        if (round-1 >= 4 && this.strategy instanceof RandomStrategy) {
+        if (round-1 == 4 && this.strategy instanceof RandomStrategy) {
           strategy = new AverageStrategy();
+        } else if ((round-1) % 2 == 0 && round-1 >= 4) {
+          strategy = new AverageStrategy();
+        } else if ((round-1) % 2 != 0 && round-1 >= 4) {
+          strategy = new TopStrategy();
         }
         return strategy;
       }

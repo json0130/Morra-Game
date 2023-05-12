@@ -29,7 +29,7 @@ public class Morra {
       askUserInput();
 
       Jarvis jarvis = Player.createAi(difficulty);
-      jarvis.runStrategy(calculateAverage(i),i);
+      jarvis.runStrategy(calculateAverage(i),i,checkMostPlayedFingers());
       
       result(jarvis.getFingers(),jarvis.getSum());
     }
@@ -105,18 +105,53 @@ public class Morra {
       playerFingerList.clear();
     }
 
+    public int checkMostPlayedFingers() {
+      int count = 0;
+      int mostPlayedFingers = 0;
+      int max = 0;
+      int maxIndex = 0;
+      ArrayList<Integer> countPlayedFingersList = new ArrayList<Integer>();
+
+      if(i > 1){
+        for (int j = 0; j < playerFingerList.size()-1; j++) {
+          mostPlayedFingers = playerFingerList.get(j);
+          for (int k = 0; k < playerFingerList.size()-1; k++) {
+            if (k != j && playerFingerList.get(k) == mostPlayedFingers) {
+              count++;
+            }
+          }
+          countPlayedFingersList.add(count);
+          count = 0;
+        }
+
+        for (int j = 0; j < countPlayedFingersList.size()-1; j++) {
+          if (countPlayedFingersList.get(j) > max) {
+            max = countPlayedFingersList.get(j);
+            maxIndex = j;
+          }
+        }
+      }
+      return playerFingerList.get(maxIndex);
+    }
+
     public void result(int aiFingers, int aiSum) {
       int fingersInt = Integer.parseInt(fingers);
       int sumInt = Integer.parseInt(sum);
 
-      if ((fingersInt + aiFingers) == aiSum) {
-        MessageCli.PRINT_OUTCOME_ROUND.printMessage("AI_WINS");
-      }
-      else if ((fingersInt + aiFingers) == sumInt) {
-        MessageCli.PRINT_OUTCOME_ROUND.printMessage("HUMAN_WINS");
-      }
-      else {
-        MessageCli.PRINT_OUTCOME_ROUND.printMessage("DRAW");
+      if((fingersInt + aiFingers) == aiSum){
+        if ((fingersInt + aiFingers) == sumInt) {
+          MessageCli.PRINT_OUTCOME_ROUND.printMessage("DRAW");
+        }
+        else {
+          MessageCli.PRINT_OUTCOME_ROUND.printMessage("AI_WINS");
+        }
+      }else{
+        if ((fingersInt + aiFingers) == sumInt) {
+          MessageCli.PRINT_OUTCOME_ROUND.printMessage("HUMAN_WINS");
+        }
+        else {
+          MessageCli.PRINT_OUTCOME_ROUND.printMessage("DRAW");
+        }
       }
     } 
 

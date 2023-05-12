@@ -6,11 +6,10 @@ public class AverageStrategy implements Strategy {
     int aiSum;
 
     @Override
-    public void runStrategy(int average) {
+    public void runStrategy(int average,int mostPlayedFingers) {
         aiFingers = Utils.getRandomNumber(1,5);
         aiSum = average + aiFingers;
          //average of player's fingers + aiFingers
-        
         MessageCli.PRINT_INFO_HAND.printMessage("Jarvis", Integer.toString(aiFingers), Integer.toString(aiSum));
     }
 
