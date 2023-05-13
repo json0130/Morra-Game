@@ -17,8 +17,6 @@ public class Morra {
   private boolean gameStarted = false;
   private ArrayList<Integer> playerFingerList = new ArrayList<Integer>();
 
-  // public Morra() {}
-
   public void newGame(Difficulty difficulty, int pointsToWin, String[] options) {
     // Starting a new game and setup the initial values
     this.difficulty = difficulty;
@@ -130,13 +128,12 @@ public class Morra {
   public int checkMostPlayedFingers() {
     // Check the most played fingers by the player
     int count = 0;
-    int mostPlayedFingers = 0;
     int max = 0;
     int maxIndex = 0;
     ArrayList<Integer> countPlayedFingersList = new ArrayList<Integer>();
 
     for (int j = 0; j < playerFingerList.size() - 1; j++) {
-      mostPlayedFingers = playerFingerList.get(j);
+      int mostPlayedFingers = playerFingerList.get(j);
       for (int k = 0; k < playerFingerList.size() - 1; k++) {
         if (k != j && playerFingerList.get(k) == mostPlayedFingers) {
           count++;
