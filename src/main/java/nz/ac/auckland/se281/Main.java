@@ -1,5 +1,5 @@
 package nz.ac.auckland.se281;
- 
+
 /** You cannot modify this class! */
 public class Main {
 
